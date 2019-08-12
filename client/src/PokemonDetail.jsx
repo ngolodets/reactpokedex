@@ -17,13 +17,13 @@ function PokemonDetail({currentPokemon, addToFavorites}) {
           <h6 className="pokedetail" >Height: {Math.floor(currentPokemon.height * 3.94)} inches</h6>
           <h6 className="pokedetail" >Weight: {Math.floor(currentPokemon.weight * 0.22)} pounds</h6>
           <h6 className="pokedetail" >Type(s): {currentPokemon.types && currentPokemon.types.map((type, i) => {
-            return <p className="pokedetail" style={{fontStyle: 'italic'}}>{type.type.name}</p>
+            return <p key={i} className="pokedetail" style={{fontStyle: 'italic'}}>{type.type.name}</p>
             })}
           </h6>
         </div>
         <div style={{float: 'left', margin: '20px', marginTop: '20px', position: 'relative', marginLeft: '75px'}}>
           <h6 className="pokedetail">Abilites: {currentPokemon.abilities && currentPokemon.abilities.map((ability, i) => {
-            return <p className="pokedetail" style={{fontStyle: 'italic'}}>{ability.ability.name}</p>
+            return <p key={i} className="pokedetail" style={{fontStyle: 'italic'}}>{ability.ability.name}</p>
             })}
           </h6>
           {/* <h6 className="pokedetail">Form(s): {currentPokemon.forms && currentPokemon.forms.map((form, i) => {
@@ -38,7 +38,7 @@ function PokemonDetail({currentPokemon, addToFavorites}) {
   } else {
     
     // content = <p>No Pokemon Selected</p>
-    content = <img style={{width: '280px', height: '280px', textAlign: 'center'}} src="http://pngimg.com/uploads/pokeball/pokeball_PNG21.png" />
+    content = <img style={{width: '295px', height: '321px', textAlign: 'center'}} src="http://pngimg.com/uploads/pokeball/pokeball_PNG21.png" />
   }
   return (
     <>

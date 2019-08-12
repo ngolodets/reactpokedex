@@ -7,7 +7,7 @@ import FavoritePokemonList from './FavoritePokemonList';
 
 function App() {
   const [allPokemon, setAllPokemon] = useState([])
-  const [currentPokemon, setCurrentPokemon] = useState({})
+  const [currentPokemon, setCurrentPokemon] = useState('')
   const [favoritePokemon, setFavoritePokemon] = useState({})
   const [favoritePokemonList, setFavoritePokemonList] = useState([])
 
@@ -22,48 +22,55 @@ function App() {
 
   useEffect(() => {
     //console.log("Displaying info for current pokemon", currentPokemon.name)
-    axios.get(`http://pokeapi.co/api/v2/pokemon/${currentPokemon}/`).then((response) => {
-      setCurrentPokemon(response.data);
-    }).catch(function (error) {
-      console.log(error);
-    })
-  }, [currentPokemon])
+    if (currentPokemon) {
+      axios.get(`http://pokeapi.co/api/v2/pokemon/${currentPokemon}/`).then((response) => {
+        setCurrentPokemon(response.data);
+      }).catch(function (error) {
+        console.log(error);
+      })
+    }
+  }, [currentPokemon, favoritePokemon])
+
+  // useEffect(() => {
+  //   //console.log("Adding info for favorite pokemon", favoritePokemon.name)
+  //   if (favoritePokemon) {
+  //     axios.get(`http://pokeapi.co/api/v2/pokemon/${favoritePokemon}/`).then((response) => {
+  //       setFavoritePokemon(response.data);
+  //     }).then(
+  //     axios.post('/pokemon/', favoritePokemon).then((response) => {
+  //       setFavoritePokemonList(response.data)
+  //     })
+  //     ).catch(function (error) {
+  //       console.log(error);
+  //     })
+  //   }
+  // }, [favoritePokemon])
 
   useEffect(() => {
-    //console.log("Adding info for favorite pokemon", favoritePokemon.name)
-    axios.get(`http://pokeapi.co/api/v2/pokemon/${favoritePokemon}/`).then((response) => {
-      setFavoritePokemon(response.data);
-    }).then(
-    axios.post('/pokemon/', favoritePokemon).then((response) => {
-      setFavoritePokemonList(response.data)
-    })).catch(function (error) {
-      console.log(error);
-    })
-  }, [favoritePokemon])
+      axios.get('/pokemon/').then((response) => {
+        setFavoritePokemonList(response.data);
+      }).catch(function (error) {
+        console.log(error);
+      })
+  }, [favoritePokemonList.length]) 
 
-  useEffect(() => {
-    axios.get('/pokemon/').then((response) => {
-      setFavoritePokemonList(response.data);
-    }).catch(function (error) {
-      console.log(error);
-    })
-  }, [favoritePokemonList]) //[])
+  // Effects are not necessarity good for useEffect() functions. See FavoritePokemonList
+  // useEffect(() => {
+  //   //console.log('fave pokemon id:', favoritePokemonList)
+  //   axios.delete('/pokemon/' + favoritePokemonList + '/').then((response) => {
+  //     setFavoritePokemonList(response.data);
+  //   }).catch(function (error) {
+  //     console.log(error);
+  //   })
+  // }, [favoritePokemonList.length]) //[])
 
-  useEffect(() => {
-    //console.log('fave pokemon id:', favoritePokemonList)
-    axios.delete('/pokemon/' + favoritePokemonList + '/').then((response) => {
-      setFavoritePokemonList(response.data);
-    }).catch(function (error) {
-      console.log(error);
-    })
-  }, [favoritePokemonList]) //[])
 
   return (
     <div style={{backgroundColor: 'rgb(166, 165, 165)', margin: '0', padding: '0'}}>
       <h1 style={{textAlign: 'center', padding: '5px', margin: '10px'}}>POKEDEX</h1>
       <div className="container">
         <div className="left">
-          <PokemonList allPokemon={allPokemon} handlePokemonClick={setCurrentPokemon} addToFavorites={setFavoritePokemon}/>
+          <PokemonList allPokemon={allPokemon} handlePokemonClick={setCurrentPokemon} setFavoritePokemonList={setFavoritePokemonList} />
         </div>
         <div className="right">
           <div className="rightdetail">
@@ -71,8 +78,10 @@ function App() {
           </div>
           <h3>MY FAVORITES:</h3>
           <div className="rightfave">
-            <FavoritePokemonList favoritePokemon={favoritePokemonList} deletePokemon={setFavoritePokemonList} handlePokemonClick={setCurrentPokemon}/>
+            <FavoritePokemonList favoritePokemon={favoritePokemonList} handlePokemonClick={setCurrentPokemon} setFavoritePokemonList={setFavoritePokemonList}/>
           </div>
+          {/* <p>deletePokemon={setFavoritePokemonList</p> */}
+          {/* <p>addToFavorites={setFavoritePokemon}</p> */}
         </div>
       </div>
     </div>
