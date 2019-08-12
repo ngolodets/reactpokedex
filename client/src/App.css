@@ -1,0 +1,78 @@
+.App {
+  text-align: center;
+  background-color: rgb(166, 165, 165);
+  margin: 5px;
+  padding: 5px;
+}
+.container {
+  display: flex;
+  height: 100vh;
+  text-align: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: rgb(166, 165, 165);
+}
+.left {
+  flex: 2;
+  overflow-y: auto;
+  background-color: rgb(166, 165, 165);
+}
+.right {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  margin: 10px;
+}
+.rightdetail {
+  flex: 1.1;
+  overflow-y: auto;
+  background-color: lightskyblue;
+  border: 7px solid rgba(255,255,255,0.5);
+}
+.rightfave {
+  flex: 1;
+  overflow-y: auto;
+  border: 7px solid rgba(255,255,255,0.5);
+}
+.poke {
+  border: 1px solid rgb(132, 102, 12);
+  border-style: outset;
+  margin: 2px;
+  padding: 2px;
+  background-color: yellow;
+}
+.pokedetail {
+  text-align: left;
+  margin: 0.5px;
+  padding: 0.5px;
+}
+.rotateimg180 {
+  -webkit-transform:rotate(110deg);
+  -moz-transform: rotate(110deg);
+  -ms-transform: rotate(110deg);
+  -o-transform: rotate(110deg);
+  transform: rotate(110deg);
+}
+.rotate {
+  animation: rotation 15s infinite linear;
+}
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+.fave {
+  border-radius: 5px;
+  border-style: outset;
+  border: 0.5px solid rgb(132, 102, 12);
+  background-color: rgba(255, 255, 255, 0.7);
+  font-family: 'Saira Stencil One', cursive;
+}
+
+
+
+
